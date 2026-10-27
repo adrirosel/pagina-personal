@@ -1,0 +1,77 @@
+# Workflow: ejecuta los tests y despliega site/ en GitHub Pages
+name: "Tests y despliegue en GitHub Pages"
+
+# Se ejecuta en push a main, en PRs hacia main y de forma manual
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Permiso mínimo por defecto: solo lectura del repositorio
+permissions:
+  contents: read
+
+# Evita cancelar un despliegue en curso si llega otro push
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  # Job de validación: html-validate + tests de Node
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      # Descarga el código del repositorio
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      # Instala Node.js 22 y activa caché de npm
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      # Instala dependencias de forma reproducible
+      - name: Install dependencies
+        run: npm ci
+
+      # Ejecuta html-validate y la batería de tests
+      - name: Run tests
+        run: npm test
+
+  # Job de despliegue: solo tras tests OK y fuera de pull requests
+  despliegue:
+    needs: tests
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    # Permisos necesarios para publicar en Pages con OIDC
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # Descarga el código del repositorio
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      # Configura el entorno de GitHub Pages
+      - name: Configure Pages
+        uses: actions/configure-pages@v6
+
+      # Sube la carpeta site/ como artefacto estático
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
+      # Publica el artefacto en GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

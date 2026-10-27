@@ -1,0 +1,238 @@
+:root {
+  --color-primario: #2563EB;
+  --color-secundario: #475569;
+  --color-fondo: #F8FAFC;
+  --color-texto: #0F172A;
+  --color-acento: #0F766E;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primario: #3B82F6;
+    --color-secundario: #94A3B8;
+    --color-fondo: #0F172A;
+    --color-texto: #F8FAFC;
+    --color-acento: #2DD4BF;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  color: var(--color-texto);
+  background-color: var(--color-fondo);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  font-family: system-ui, sans-serif;
+  line-height: 1.25;
+}
+
+a {
+  color: var(--color-primario);
+}
+
+.cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--color-secundario);
+}
+
+.avatar {
+  flex-shrink: 0;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+}
+
+.identidad {
+  flex: 1;
+  text-align: center;
+}
+
+.identidad h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.titular {
+  display: block;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-secundario);
+}
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  justify-content: flex-end;
+}
+
+nav a {
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--color-acento);
+}
+
+nav a:hover,
+nav a:focus-visible {
+  color: var(--color-primario);
+  text-decoration: underline;
+}
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+}
+
+section {
+  margin-bottom: 2.5rem;
+}
+
+.seccion-titulo {
+  margin-top: 0;
+}
+
+.lista-habilidades {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.lista-habilidades li {
+  border-left: 3px solid var(--color-acento);
+  padding-left: 1rem;
+}
+
+.lista-habilidades strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--color-primario);
+}
+
+.lista-habilidades p {
+  margin: 0;
+  color: var(--color-secundario);
+}
+
+.proyectos-rejilla {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.proyecto {
+  background-color: var(--color-fondo);
+  border: 1px solid var(--color-secundario);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+  padding: 1.25rem;
+}
+
+.proyecto h2,
+.proyecto h3 {
+  margin-top: 0;
+  color: var(--color-primario);
+}
+
+.enlace-proyectos {
+  margin-top: 1.5rem;
+}
+
+.tecnologias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 1rem 0;
+  padding: 0;
+}
+
+.tecnologias li {
+  background-color: var(--color-secundario);
+  color: var(--color-fondo);
+  border-radius: 12px;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.875rem;
+}
+
+.proyecto a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.55rem 1rem;
+  border-radius: 12px;
+  background-color: var(--color-primario);
+  color: var(--color-fondo);
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.18);
+}
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid var(--color-secundario);
+  color: var(--color-secundario);
+}
+
+.boton {
+  border: none;
+  border-radius: 12px;
+  background-color: var(--color-primario);
+  color: var(--color-fondo);
+  padding: 0.6rem 1.1rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.18);
+}
+
+.boton:hover,
+.boton:focus-visible {
+  background-color: var(--color-acento);
+}
+
+@media (max-width: 768px) {
+  .cabecera {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  nav ul {
+    justify-content: center;
+  }
+
+  .proyectos-rejilla {
+    grid-template-columns: 1fr;
+  }
+
+  footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}
