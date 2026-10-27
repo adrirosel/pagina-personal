@@ -3,7 +3,7 @@ export const PERFIL = {
   titulo: "Adrián Rosel Martínez · Página personal",
   usuarioGithub: "adrirosel",
   email: "2863208@alu.murciaeduca.es",
-  minimoProyectos: 3,
+  minimoProyectos: 4,
   minimoHabilidades: 6,
   secciones: ["sobre-mi", "formacion", "habilidades", "contacto"],
   paleta: {
@@ -11,7 +11,7 @@ export const PERFIL = {
     "--color-secundario": "#475569",
     "--color-fondo": "#F8FAFC",
     "--color-texto": "#0F172A",
-    "--color-acento": "#0F766E",
+    "--color-acento": "#0284C7",
   },
   fuenteTitulos: "system-ui, sans-serif",
   fuenteTexto: "system-ui, sans-serif",
